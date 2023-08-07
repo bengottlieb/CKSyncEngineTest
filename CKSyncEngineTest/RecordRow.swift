@@ -24,6 +24,13 @@ struct RecordRow: View {
 					record.start()
 				}
 			}
+			
+			Spacer()
+			if !record.timestamps.isEmpty {
+				Button("Reset") {
+					record.reset()
+				}
+			}
 		}
 	}
 }

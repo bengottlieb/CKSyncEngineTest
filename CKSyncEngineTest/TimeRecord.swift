@@ -17,7 +17,7 @@ import Suite
 	
 	@Transient var timestamps: [TimeInterval] {
 		get { timestampString.components(separatedBy: ",").compactMap { TimeInterval($0) }}
-		set { timestampString = newValue.map { "\($0)" }.joined(separator: ",") }
+		set { timestampString = newValue.map { "\(Int($0))" }.joined(separator: ",") }
 	}
 	
 	@Transient var dayString: String {
@@ -38,6 +38,10 @@ import Suite
 		if !isRunning { return }
 		
 		timestamps.append(Date.now.timeIntervalSince(gmtDate))
+	}
+
+	func reset() {
+		timestampString = ""
 	}
 
 	
