@@ -6,19 +6,32 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct ContentView: View {
-    var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
-        }
-        .padding()
-    }
+	@State var newDate = Date()
+	@Environment(\.modelContext) var modelContext
+	@Query(sort: \TimeRecord.gmtDate, order: .reverse) private var records: [TimeRecord]
+
+	var body: some View {
+		VStack {
+			ForEach(records) { record  in
+				RecordRow(record: record)
+			}
+			DatePicker("New Day", selection: $newDate, displayedComponents: [.date])
+		}
+		.padding()
+		.onChange(of: newDate) { oldValue, newValue in
+			do {
+				let newRecord = try modelContext.record(forDate: newDate)
+				modelContext.insert(newRecord)
+			} catch {
+				print("Failed to look up day: \(error)")
+			}
+		}
+	}
 }
 
 #Preview {
-    ContentView()
+	ContentView()
 }

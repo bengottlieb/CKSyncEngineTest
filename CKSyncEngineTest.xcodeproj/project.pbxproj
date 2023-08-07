@@ -7,19 +7,29 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B5B1E3662A80F81400CF5103 /* RecordRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5B1E3652A80F81400CF5103 /* RecordRow.swift */; };
+		B5B1E3682A80F9C600CF5103 /* Synchronizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5B1E3672A80F9C600CF5103 /* Synchronizer.swift */; };
 		B5D3C2942A805CB70037CC07 /* CKSyncEngineTestApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D3C2932A805CB70037CC07 /* CKSyncEngineTestApp.swift */; };
 		B5D3C2962A805CB70037CC07 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D3C2952A805CB70037CC07 /* ContentView.swift */; };
 		B5D3C2982A805CB90037CC07 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B5D3C2972A805CB90037CC07 /* Assets.xcassets */; };
 		B5D3C29C2A805CB90037CC07 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B5D3C29B2A805CB90037CC07 /* Preview Assets.xcassets */; };
+		B5D3C2A32A806B8E0037CC07 /* TimeRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D3C2A22A806B8E0037CC07 /* TimeRecord.swift */; };
+		B5D3C2A62A806D690037CC07 /* Suite in Frameworks */ = {isa = PBXBuildFile; productRef = B5D3C2A52A806D690037CC07 /* Suite */; };
+		B5D3C2C52A808BCD0037CC07 /* ModelContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D3C2C42A808BCD0037CC07 /* ModelContext.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B5B1E3652A80F81400CF5103 /* RecordRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordRow.swift; sourceTree = "<group>"; };
+		B5B1E3672A80F9C600CF5103 /* Synchronizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Synchronizer.swift; sourceTree = "<group>"; };
+		B5B1E3692A80FE6800CF5103 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		B5D3C2902A805CB70037CC07 /* CKSyncEngineTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CKSyncEngineTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5D3C2932A805CB70037CC07 /* CKSyncEngineTestApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CKSyncEngineTestApp.swift; sourceTree = "<group>"; };
 		B5D3C2952A805CB70037CC07 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		B5D3C2972A805CB90037CC07 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B5D3C2992A805CB90037CC07 /* CKSyncEngineTest.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CKSyncEngineTest.entitlements; sourceTree = "<group>"; };
 		B5D3C29B2A805CB90037CC07 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		B5D3C2A22A806B8E0037CC07 /* TimeRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeRecord.swift; sourceTree = "<group>"; };
+		B5D3C2C42A808BCD0037CC07 /* ModelContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelContext.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -27,6 +37,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B5D3C2A62A806D690037CC07 /* Suite in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -52,8 +63,13 @@
 		B5D3C2922A805CB70037CC07 /* CKSyncEngineTest */ = {
 			isa = PBXGroup;
 			children = (
+				B5B1E3692A80FE6800CF5103 /* Info.plist */,
 				B5D3C2932A805CB70037CC07 /* CKSyncEngineTestApp.swift */,
+				B5B1E3672A80F9C600CF5103 /* Synchronizer.swift */,
 				B5D3C2952A805CB70037CC07 /* ContentView.swift */,
+				B5B1E3652A80F81400CF5103 /* RecordRow.swift */,
+				B5D3C2C42A808BCD0037CC07 /* ModelContext.swift */,
+				B5D3C2A22A806B8E0037CC07 /* TimeRecord.swift */,
 				B5D3C2972A805CB90037CC07 /* Assets.xcassets */,
 				B5D3C2992A805CB90037CC07 /* CKSyncEngineTest.entitlements */,
 				B5D3C29A2A805CB90037CC07 /* Preview Content */,
@@ -85,6 +101,9 @@
 			dependencies = (
 			);
 			name = CKSyncEngineTest;
+			packageProductDependencies = (
+				B5D3C2A52A806D690037CC07 /* Suite */,
+			);
 			productName = CKSyncEngineTest;
 			productReference = B5D3C2902A805CB70037CC07 /* CKSyncEngineTest.app */;
 			productType = "com.apple.product-type.application";
@@ -113,6 +132,9 @@
 				Base,
 			);
 			mainGroup = B5D3C2872A805CB60037CC07;
+			packageReferences = (
+				B5D3C2A42A806D690037CC07 /* XCRemoteSwiftPackageReference "suite" */,
+			);
 			productRefGroup = B5D3C2912A805CB70037CC07 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -140,7 +162,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				B5D3C2962A805CB70037CC07 /* ContentView.swift in Sources */,
+				B5D3C2A32A806B8E0037CC07 /* TimeRecord.swift in Sources */,
+				B5B1E3662A80F81400CF5103 /* RecordRow.swift in Sources */,
 				B5D3C2942A805CB70037CC07 /* CKSyncEngineTestApp.swift in Sources */,
+				B5D3C2C52A808BCD0037CC07 /* ModelContext.swift in Sources */,
+				B5B1E3682A80F9C600CF5103 /* Synchronizer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -274,6 +300,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = CKSyncEngineTest/Info.plist;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -312,6 +339,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = CKSyncEngineTest/Info.plist;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -359,6 +387,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		B5D3C2A42A806D690037CC07 /* XCRemoteSwiftPackageReference "suite" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/bengottlieb/suite";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.92;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		B5D3C2A52A806D690037CC07 /* Suite */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B5D3C2A42A806D690037CC07 /* XCRemoteSwiftPackageReference "suite" */;
+			productName = Suite;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = B5D3C2882A805CB60037CC07 /* Project object */;
 }

@@ -6,12 +6,21 @@
 //
 
 import SwiftUI
+import SwiftData
+import Suite
 
 @main
 struct CKSyncEngineTestApp: App {
-    var body: some Scene {
-        WindowGroup {
-            ContentView()
-        }
-    }
+	let container = try! ModelContainer(for: [TimeRecord.self], .init(url: .document(named: "model.sqlite")))
+	
+	init() {
+		Synchronizer.setup(with: container)
+	}
+	var body: some Scene {
+		WindowGroup {
+			ContentView()
+				.modelContainer(container)
+			//				  .modelContainer(for: [TimeRecord.self])
+		}
+	}
 }
