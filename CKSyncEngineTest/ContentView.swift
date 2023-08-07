@@ -11,10 +11,15 @@ import SwiftData
 struct ContentView: View {
 	@State var newDate = Date()
 	@Environment(\.modelContext) var modelContext
+	@Environment(Synchronizer.self) var synchronizer
+	
 	@Query(sort: \TimeRecord.gmtDate, order: .reverse) private var records: [TimeRecord]
 
 	var body: some View {
 		VStack {
+			if synchronizer.isSynchronizing {
+				ProgressView()
+			}
 			ForEach(records) { record  in
 				RecordRow(record: record)
 			}

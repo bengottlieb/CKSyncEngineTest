@@ -8,10 +8,12 @@
 import Foundation
 import CloudKit
 import SwiftData
+import Observation
 
-final class Synchronizer {
+@Observable final class Synchronizer {
 	static var instance: Synchronizer!
 	
+	var isSynchronizing = false
 	let modelContainer: ModelContainer
 	static var engine: CKSyncEngine!
 	let ckContainer = CKContainer(identifier: "iCloud.con.standalone.cloudkittesting")
@@ -42,8 +44,7 @@ extension Synchronizer: CKSyncEngineDelegate {
 //			print("Handle Event: update: \(update)")
 
 		case .accountChange(let account):
-//			print("Handle Event: accountChange: \(account)")
-			break
+			print("Handle Event: accountChange: \(account)")
 
 		case .fetchedDatabaseChanges(let changes):
 			print("Handle Event: fetchedDatabaseChanges: \(changes)")
@@ -53,21 +54,24 @@ extension Synchronizer: CKSyncEngineDelegate {
 			print("Handle Event: fetchedRecordZoneChanges: \(changes)")
 			break
 		case .sentDatabaseChanges(_):
-			break
+			print("Send database changes")
 		case .sentRecordZoneChanges(_):
-			break
+			print("Send zone changes")
 		case .willFetchChanges(_):
-			break
-		case .willFetchRecordZoneChanges(_):
-			break
-		case .didFetchRecordZoneChanges(_):
-			break
+			print("will fetch changes")
+			isSynchronizing = true
+		case .willFetchRecordZoneChanges(let changes):
+			print("handling \(changes)")
+		case .didFetchRecordZoneChanges(let changes):
+			print("handling \(changes)")
 		case .didFetchChanges(_):
-			break
+			print("did fetch changes")
+			isSynchronizing = false
 		case .willSendChanges(_):
-			break
+			print("will send changes")
+			isSynchronizing = true
 		case .didSendChanges(_):
-			break
+			print("did send changes")
 		@unknown default:
 			break
 		}

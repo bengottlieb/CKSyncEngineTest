@@ -20,6 +20,7 @@ struct CKSyncEngineTestApp: App {
 		WindowGroup {
 			ContentView()
 				.modelContainer(container)
+				.environment(Synchronizer.instance!)
 			//				  .modelContainer(for: [TimeRecord.self])
 		}
 	}

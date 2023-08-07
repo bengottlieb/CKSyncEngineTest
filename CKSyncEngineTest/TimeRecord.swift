@@ -10,6 +10,7 @@ import SwiftData
 import Suite
 
 @Model class TimeRecord {
+	var createdAt = Date()
 	var timestampString = ""
 	var gmtDate: Date = Date().midnight.addingTimeInterval(-TimeInterval(TimeZone.current.secondsFromGMT()))
 	var isRunning: Bool { timestamps.count % 2 != 0 }
