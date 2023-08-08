@@ -10,6 +10,15 @@ import SwiftData
 import Suite
 
 extension ModelContext {
+	func deleteRecord(forDate date: Date) throws {
+		let day = date.midnight.addingTimeInterval(-TimeInterval(TimeZone.current.secondsFromGMT()))
+		
+		let predicate = #Predicate<TimeRecord> { $0.gmtDate == day }
+		let descriptor = FetchDescriptor(predicate: predicate, sortBy: [])
+		let fetched = try fetch(descriptor)
+		if let first = fetched.first { return delete(first) }
+	}
+
 	func record(forDate date: Date) throws -> TimeRecord {
 		let day = date.midnight.addingTimeInterval(-TimeInterval(TimeZone.current.secondsFromGMT()))
 		
@@ -20,6 +29,7 @@ extension ModelContext {
 		
 		let new = TimeRecord()
 		new.gmtDate = day
+		self.insert(new)
 		return new
 	}
 }

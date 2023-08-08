@@ -16,7 +16,7 @@ import Observation
 	var isSynchronizing = false
 	let modelContainer: ModelContainer
 	static var engine: CKSyncEngine!
-	let ckContainer = CKContainer(identifier: "iCloud.con.standalone.cloudkittesting")
+	let ckContainer = CKContainer(identifier: "iCloud.com.standalone.ckenginetesting")
 	
 	static var syncState: CKSyncEngine.State.Serialization? {
 		get { try? CKSyncEngine.State.Serialization.loadJSON(file: .document(named: "syncState")) }

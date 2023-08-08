@@ -13,6 +13,7 @@ struct ContentView: View {
 	@State var newDate = Date()
 	@Environment(\.modelContext) var modelContext
 	@Environment(Synchronizer.self) var synchronizer
+	@State var addingDay: Date?
 	
 	@Query(sort: \TimeRecord.gmtDate, order: .reverse) private var records: [TimeRecord]
 
@@ -38,6 +39,41 @@ struct ContentView: View {
 			}
 			.frame(height: 25)
 			
+			if let addingDay {
+				Text("Adding \(addingDay.formatted(date: .abbreviated, time: .omitted))")
+			}
+			HStack {
+				Button("Add a Bunch") {
+					var date = Date.now.byAdding(days: -1000)
+					
+					while date < .now {
+						do {
+							let newRecord = try modelContext.record(forDate: date)
+							modelContext.insert(newRecord)
+							date = date.nextDay
+							addingDay = date
+						} catch {
+							print("Failed to add day: \(error)")
+						}
+					}
+				}
+
+				
+				Button("Delete a Bunch") {
+					var date = Date.now.byAdding(days: -1000)
+					
+					while date < .now {
+						do {
+							try modelContext.deleteRecord(forDate: date)
+							date = date.nextDay
+							addingDay = date
+						} catch {
+							print("Failed to add day: \(error)")
+						}
+					}
+				}
+
+			}
 			DatePicker("New Day", selection: $newDate, displayedComponents: [.date])
 			
 			ScrollView {
@@ -51,7 +87,6 @@ struct ContentView: View {
 		.onChange(of: newDate) { oldValue, newValue in
 			do {
 				let newRecord = try modelContext.record(forDate: newDate)
-				modelContext.insert(newRecord)
 			} catch {
 				print("Failed to look up day: \(error)")
 			}
