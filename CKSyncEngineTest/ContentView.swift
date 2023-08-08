@@ -7,6 +7,7 @@
 
 import SwiftUI
 import SwiftData
+import Suite
 
 struct ContentView: View {
 	@State var newDate = Date()
@@ -17,13 +18,34 @@ struct ContentView: View {
 
 	var body: some View {
 		VStack {
-			if synchronizer.isSynchronizing {
-				ProgressView()
+			HStack {
+				Spacer()
+				
+				if synchronizer.isSynchronizing {
+					ProgressView()
+				} else {
+					AsyncButton(action: {
+						do {
+							try await synchronizer.sync()
+						} catch {
+							print("Failed to sync: \(error)")
+						}
+						
+					}) {
+						Image(systemName: "arrow.clockwise")
+					}
+				}
 			}
-			ForEach(records) { record  in
-				RecordRow(record: record)
-			}
+			.frame(height: 25)
+			
 			DatePicker("New Day", selection: $newDate, displayedComponents: [.date])
+			
+			ScrollView {
+				ForEach(records) { record  in
+					RecordRow(record: record)
+				}
+			}
+
 		}
 		.padding()
 		.onChange(of: newDate) { oldValue, newValue in
