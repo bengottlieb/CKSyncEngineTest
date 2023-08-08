@@ -8,6 +8,7 @@
 import Foundation
 import SwiftData
 import Suite
+import CloudKit
 
 @Model class TimeRecord {
 	var createdAt = Date()
@@ -35,13 +36,19 @@ import Suite
 	}
 
 	func stop() {
-		if !isRunning { return }
+		guard let last = timestamps.last else { return }
 		
-		timestamps.append(Date.now.timeIntervalSince(gmtDate))
+		timestamps.append(Date.now.timeIntervalSince(gmtDate) - last)
 	}
 
 	func reset() {
 		timestampString = ""
+	}
+	
+	func load(from record: CKRecord) {
+		if let stamps = record["CD_timestampString"] as? String {
+			timestampString = stamps
+		}
 	}
 
 	

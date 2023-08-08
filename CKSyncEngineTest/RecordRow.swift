@@ -9,6 +9,7 @@ import SwiftUI
 import SwiftData
 
 struct RecordRow: View {
+	@Environment(Synchronizer.self) var synchronizer
 	let record: TimeRecord
 	
 	var body: some View {
@@ -32,5 +33,6 @@ struct RecordRow: View {
 				}
 			}
 		}
+		.opacity(synchronizer.isSynchronizing ? 0.5 : 1)
 	}
 }

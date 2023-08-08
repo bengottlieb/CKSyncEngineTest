@@ -51,8 +51,21 @@ extension Synchronizer: CKSyncEngineDelegate {
 			break
 
 		case .fetchedRecordZoneChanges(let changes):
-			print("Handle Event: fetchedRecordZoneChanges: \(changes)")
-			break
+			Task {
+				let context = ModelContext(modelContainer)
+				for change in changes.modifications {
+					do {
+						guard let date = change.record["CD_gmtDate"] as? Date else { continue }
+						let existing = try context.record(forDate: date)
+						existing.load(from: change.record)
+					} catch {
+						print("Failed to look up local version of \(change)")
+					}
+				}
+				
+				try? context.save()
+			}
+			
 		case .sentDatabaseChanges(_):
 			print("Send database changes")
 		case .sentRecordZoneChanges(_):
@@ -66,7 +79,9 @@ extension Synchronizer: CKSyncEngineDelegate {
 			print("handling \(changes)")
 		case .didFetchChanges(_):
 			print("did fetch changes")
-			isSynchronizing = false
+			DispatchQueue.main.async {
+				self.isSynchronizing = false
+			}
 		case .willSendChanges(_):
 			print("will send changes")
 			isSynchronizing = true
