@@ -12,12 +12,12 @@ import CloudKit
 
 @Model class TimeRecord {
 	var createdAt: Date!
-	var timestampString: String!
+	var timestampString: String?
 	var gmtDate: Date! 
 	var isRunning: Bool { timestamps.count % 2 != 0 }
 	
 	@Transient var timestamps: [TimeInterval] {
-		get { timestampString.components(separatedBy: ",").compactMap { TimeInterval($0) }}
+		get { (timestampString ?? "").components(separatedBy: ",").compactMap { TimeInterval($0) }}
 		set { timestampString = newValue.map { "\(Int($0))" }.joined(separator: ",") }
 	}
 	
@@ -49,7 +49,7 @@ import CloudKit
 	
 	func load(from record: CKRecord) {
 		if let stamps = record["CD_timestampString"] as? String {
-			timestampString = stamps + "new!"
+			timestampString = stamps
 		}
 	}
 

@@ -86,7 +86,7 @@ struct ContentView: View {
 		.padding()
 		.onChange(of: newDate) { oldValue, newValue in
 			do {
-				let newRecord = try modelContext.record(forDate: newDate)
+				try modelContext.record(forDate: newDate)
 			} catch {
 				print("Failed to look up day: \(error)")
 			}
