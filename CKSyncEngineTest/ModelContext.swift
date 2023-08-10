@@ -27,8 +27,7 @@ extension ModelContext {
 		let fetched = try fetch(descriptor)
 		if let first = fetched.first { return first }
 		
-		let new = TimeRecord()
-		new.gmtDate = day
+		let new = TimeRecord(date: day)
 		self.insert(new)
 		return new
 	}

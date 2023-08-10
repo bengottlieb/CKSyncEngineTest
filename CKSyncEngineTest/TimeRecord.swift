@@ -11,9 +11,9 @@ import Suite
 import CloudKit
 
 @Model class TimeRecord {
-	var createdAt = Date()
-	var timestampString = ""
-	var gmtDate: Date = Date().midnight.addingTimeInterval(-TimeInterval(TimeZone.current.secondsFromGMT()))
+	var createdAt: Date!
+	var timestampString: String!
+	var gmtDate: Date! 
 	var isRunning: Bool { timestamps.count % 2 != 0 }
 	
 	@Transient var timestamps: [TimeInterval] {
@@ -25,8 +25,10 @@ import CloudKit
 		gmtDate.addingTimeInterval(TimeInterval(TimeZone.current.secondsFromGMT())).formatted()
 	}
 	
-	init() {
-		
+	init(date: Date) {
+		self.createdAt = Date()
+		self.timestampString = ""
+		self.gmtDate = date.midnight.addingTimeInterval(-TimeInterval(TimeZone.current.secondsFromGMT()))
 	}
 	
 	func start() {
@@ -47,10 +49,10 @@ import CloudKit
 	
 	func load(from record: CKRecord) {
 		if let stamps = record["CD_timestampString"] as? String {
-			timestampString = stamps
+			timestampString = stamps + "new!"
 		}
 	}
 
 	
-	static var sample = TimeRecord()
+	static var sample = TimeRecord(date: .now)
 }
